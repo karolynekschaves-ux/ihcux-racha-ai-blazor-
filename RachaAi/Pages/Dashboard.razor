@@ -1,0 +1,58 @@
+@page "/dashboard"
+@using RachaAi.Models
+@using RachaAi.Shared
+
+<div class="container-fluid px-4">
+    <div class="d-flex justify-content-between align-items-center my-4">
+        <h2> RachaAi </h2>
+        <button class="btn btn-secondary rounded-pill px-4">Novo Gasto</button>
+    </div>
+
+    <!-- Seção de Cards de Resumo -->
+    <div class="row g-3 mb-4">
+        <div class="col-12 col-md-4">
+            <div class="card bg-secondary text-white border-0 shadow-sm p-3">
+                <small>Saldo Geral</small>
+                <h3 class="fw-bold">R$ 100,00</h3>
+            </div>
+        </div>
+        <div class="col-12 col-md-4">
+            <div class="card border-0 shadow-sm p-3">
+                <small class="text-muted">A Receber</small>
+                <h3 class="text-secondary fw-bold">R$ 900,00</h3>
+            </div>
+        </div>
+        <div class="col-12 col-md-4">
+            <div class="card border-0 shadow-sm p-3">
+                <small class="text-muted">A Pagar</small>
+                <h3 class="text-secondary fw-bold">R$ 45,00</h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- Barra de Busca -->
+    <div class="input-group mb-4 shadow-sm">
+        <span class="input-group-text bg-white border-end-0"><i class="bi bi-search"></i></span>
+        <input type="text" class="form-control border-start-0" placeholder="Buscar grupo ou categoria...">
+    </div>
+
+    <h6 class="text-muted mb-3">SEUS GRUPOS ATIVOS</h6>
+
+    <!-- Lista de Grupos -->
+    <div class="list-group shadow-sm">
+        @foreach (var grupo in meusGrupos)
+        {
+            <GrupoCard Grupo="grupo" />
+        }
+    </div>
+</div>
+
+@code {
+    private List<Grupos> meusGrupos = new() {
+        new Grupos { Name = "Casa", ValorPendente = 45.00m, NoVermelho = true },
+        new Grupos { Name = "Viagem", ValorPendente = 650.00m, NoVermelho = false },
+        new Grupos { Name = "Almoço Trabalho", ValorPendente = 250.00m, NoVermelho = false },
+       
+    };
+}  
+
